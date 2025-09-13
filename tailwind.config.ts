@@ -47,6 +47,22 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Agricultural theme colors
+        field: {
+          green: "hsl(var(--field-green))",
+        },
+        earth: {
+          brown: "hsl(var(--earth-brown))",
+        },
+        harvest: {
+          gold: "hsl(var(--harvest-gold))",
+        },
+        sky: {
+          blue: "hsl(var(--sky-blue))",
+        },
+        soil: {
+          dark: "hsl(var(--soil-dark))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
