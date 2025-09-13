@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { MapPin, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface FarmFormProps {
   onSubmit: (data: FormData) => void;
@@ -19,22 +20,8 @@ export interface FormData {
   season: string;
 }
 
-const soilTypes = [
-  { value: "clay", label: "Clay Soil" },
-  { value: "sandy", label: "Sandy Soil" },
-  { value: "loam", label: "Loam Soil" },
-  { value: "black", label: "Black Cotton Soil" },
-  { value: "red", label: "Red Soil" },
-  { value: "alluvial", label: "Alluvial Soil" },
-];
-
-const seasons = [
-  { value: "kharif", label: "Kharif (Monsoon)" },
-  { value: "rabi", label: "Rabi (Winter)" },
-  { value: "zaid", label: "Zaid (Summer)" },
-];
-
 export const FarmForm = ({ onSubmit }: FarmFormProps) => {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState<FormData>({
     location: "",
     soilType: "",
@@ -127,23 +114,20 @@ export const FarmForm = ({ onSubmit }: FarmFormProps) => {
   return (
     <Card className="w-full max-w-2xl mx-auto shadow-lg">
       <CardHeader className="text-center">
-        <CardTitle className="text-2xl font-bold bg-gradient-to-r from-primary to-field-green bg-clip-text text-transparent">
-          Farm Advisory Input
+        <CardTitle className="text-xl font-bold bg-gradient-to-r from-primary to-field-green bg-clip-text text-transparent">
+          {t('crop.recommendations')}
         </CardTitle>
-        <CardDescription className="text-lg">
-          Enter your farm details to get personalized crop recommendations
-        </CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-2">
             <Label htmlFor="location" className="text-base font-medium">
-              Farm Location
+              {t('location')}
             </Label>
             <div className="flex gap-2">
               <Input
                 id="location"
-                placeholder="Enter your city or region"
+                placeholder={t('enter.location')}
                 value={formData.location}
                 onChange={(e) => setFormData(prev => ({ ...prev, location: e.target.value }))}
                 className="flex-1"
@@ -166,36 +150,34 @@ export const FarmForm = ({ onSubmit }: FarmFormProps) => {
 
           <div className="space-y-2">
             <Label htmlFor="soilType" className="text-base font-medium">
-              Soil Type
+              {t('soil')}
             </Label>
             <Select onValueChange={(value) => setFormData(prev => ({ ...prev, soilType: value }))}>
               <SelectTrigger>
-                <SelectValue placeholder="Select your soil type" />
+                <SelectValue placeholder={t('select.soil')} />
               </SelectTrigger>
               <SelectContent>
-                {soilTypes.map((soil) => (
-                  <SelectItem key={soil.value} value={soil.value}>
-                    {soil.label}
-                  </SelectItem>
-                ))}
+                <SelectItem value="clay">{t('clay')}</SelectItem>
+                <SelectItem value="sandy">{t('sandy')}</SelectItem>
+                <SelectItem value="loam">{t('loam')}</SelectItem>
+                <SelectItem value="black">{t('black')}</SelectItem>
+                <SelectItem value="red">{t('red')}</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           <div className="space-y-2">
             <Label htmlFor="season" className="text-base font-medium">
-              Growing Season
+              {t('season')}
             </Label>
             <Select onValueChange={(value) => setFormData(prev => ({ ...prev, season: value }))}>
               <SelectTrigger>
-                <SelectValue placeholder="Select growing season" />
+                <SelectValue placeholder={t('select.season')} />
               </SelectTrigger>
               <SelectContent>
-                {seasons.map((season) => (
-                  <SelectItem key={season.value} value={season.value}>
-                    {season.label}
-                  </SelectItem>
-                ))}
+                <SelectItem value="kharif">{t('kharif')}</SelectItem>
+                <SelectItem value="rabi">{t('rabi')}</SelectItem>
+                <SelectItem value="zaid">{t('zaid')}</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -204,7 +186,7 @@ export const FarmForm = ({ onSubmit }: FarmFormProps) => {
             type="submit" 
             className="w-full h-12 text-lg font-semibold bg-gradient-to-r from-primary to-field-green hover:from-primary/90 hover:to-field-green/90 transition-all duration-300"
           >
-            Get Crop Recommendations
+            {t('get.recommendations')}
           </Button>
         </form>
       </CardContent>

@@ -4,6 +4,7 @@ import { FarmForm, FormData } from "@/components/FarmForm";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Leaf, TrendingUp, Users, Award } from "lucide-react";
+import { LanguageSelector } from "@/components/LanguageSelector";
 import heroImage from "@/assets/hero-farm.jpg";
 
 const Index = () => {
@@ -15,6 +16,11 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Language Selector - Fixed Position */}
+      <div className="fixed top-4 right-4 z-50">
+        <LanguageSelector />
+      </div>
+
       {/* Hero Section */}
       <section className="relative overflow-hidden">
         <div 
